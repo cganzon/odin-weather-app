@@ -1,8 +1,4 @@
-import { loadContent, addFormListener } from "./modules/domManipulation";
-import { cacheDom } from "./modules/cacheDom";
+import { loadContent, addListeners } from "./modules/domManipulation";
 
-(() => {
-  loadContent();
-  const dom = cacheDom();
-  addFormListener(dom);
-})();
+loadContent();
+addListeners();

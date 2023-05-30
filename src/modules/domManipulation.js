@@ -1,4 +1,17 @@
 import { getWeather } from "./weatherApi";
+import { cacheDom } from "./cacheDom";
+
+export function loadContent() {
+  const mainContent = document.createElement("div");
+  mainContent.classList.add("main-content");
+  mainContent.append(createForm());
+  document.body.append(mainContent);
+}
+
+export function addListeners() {
+  const dom = cacheDom();
+  addFormListener(dom);
+}
 
 function createForm() {
   const locationForm = document.createElement("form");
@@ -17,14 +30,7 @@ function createForm() {
   return locationForm;
 }
 
-export function loadContent() {
-  const mainContent = document.createElement("div");
-  mainContent.classList.add("main-content");
-  mainContent.append(createForm());
-  document.body.append(mainContent);
-}
-
-export function addFormListener(dom) {
+function addFormListener(dom) {
   dom.locationForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const searchValue = dom.locationInput.value;
