@@ -17,12 +17,10 @@ export function createForm() {
   return locationForm;
 }
 
-export function addFormListener() {
-  document
-    .querySelector(".location-form")
-    .addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const searchValue = document.querySelector(".location-input").value;
-      console.log(await getWeather(searchValue));
-    });
+export function addFormListener(dom) {
+  dom.locationForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const searchValue = dom.locationInput.value;
+    console.log(await getWeather(searchValue));
+  });
 }
