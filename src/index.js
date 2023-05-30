@@ -1,1 +1,3 @@
-console.log("Hello from index.js!");
+import { getWeather } from "./modules/weatherApi";
+
+console.log(await getWeather("San Diego"));
