@@ -1,3 +1,5 @@
+import { getWeather } from "./weatherApi";
+
 export function createForm() {
   const locationForm = document.createElement("form");
   locationForm.classList.add("location-form");
@@ -16,9 +18,11 @@ export function createForm() {
 }
 
 export function addFormListener() {
-  document.querySelector(".location-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const searchValue = document.querySelector(".location-input").value;
-    console.log(searchValue);
-  });
+  document
+    .querySelector(".location-form")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const searchValue = document.querySelector(".location-input").value;
+      console.log(await getWeather(searchValue));
+    });
 }

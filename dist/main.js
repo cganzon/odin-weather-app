@@ -26,7 +26,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addFormListener: () => (/* binding */ addFormListener),\n/* harmony export */   createForm: () => (/* binding */ createForm)\n/* harmony export */ });\nfunction createForm() {\n  const locationForm = document.createElement(\"form\");\n  locationForm.classList.add(\"location-form\");\n\n  const locationInput = document.createElement(\"input\");\n  locationInput.classList.add(\"location-input\");\n  locationInput.setAttribute(\"type\", \"text\");\n\n  const searchBtn = document.createElement(\"button\");\n  searchBtn.classList.add(\"search-btn\");\n  searchBtn.setAttribute(\"type\", \"submit\");\n  searchBtn.textContent = \"Search\";\n\n  locationForm.append(locationInput, searchBtn);\n  return locationForm;\n}\n\nfunction addFormListener() {\n  document.querySelector(\".location-form\").addEventListener(\"submit\", (e) => {\n    e.preventDefault();\n    const searchValue = document.querySelector(\".location-input\").value;\n    console.log(searchValue);\n  });\n}\n\n\n//# sourceURL=webpack://odin-weather-app/./src/modules/dom.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addFormListener: () => (/* binding */ addFormListener),\n/* harmony export */   createForm: () => (/* binding */ createForm)\n/* harmony export */ });\n/* harmony import */ var _weatherApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weatherApi */ \"./src/modules/weatherApi.js\");\n\n\nfunction createForm() {\n  const locationForm = document.createElement(\"form\");\n  locationForm.classList.add(\"location-form\");\n\n  const locationInput = document.createElement(\"input\");\n  locationInput.classList.add(\"location-input\");\n  locationInput.setAttribute(\"type\", \"text\");\n\n  const searchBtn = document.createElement(\"button\");\n  searchBtn.classList.add(\"search-btn\");\n  searchBtn.setAttribute(\"type\", \"submit\");\n  searchBtn.textContent = \"Search\";\n\n  locationForm.append(locationInput, searchBtn);\n  return locationForm;\n}\n\nfunction addFormListener() {\n  document\n    .querySelector(\".location-form\")\n    .addEventListener(\"submit\", async (e) => {\n      e.preventDefault();\n      const searchValue = document.querySelector(\".location-input\").value;\n      console.log(await (0,_weatherApi__WEBPACK_IMPORTED_MODULE_0__.getWeather)(searchValue));\n    });\n}\n\n\n//# sourceURL=webpack://odin-weather-app/./src/modules/dom.js?");
+
+/***/ }),
+
+/***/ "./src/modules/weatherApi.js":
+/*!***********************************!*\
+  !*** ./src/modules/weatherApi.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getWeather: () => (/* binding */ getWeather)\n/* harmony export */ });\nasync function getWeather(location) {\n  const response = await fetch(\n    `https://api.weatherapi.com/v1/current.json?q=${location}&key=81f814f5795a492392023803232405`\n  );\n  const weatherData = await response.json();\n  return weatherData;\n}\n\n\n//# sourceURL=webpack://odin-weather-app/./src/modules/weatherApi.js?");
 
 /***/ })
 
