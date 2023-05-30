@@ -16,17 +16,27 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/dom */ \"./src/modules/dom.js\");\n\n\n(() => {\n  const mainContent = document.createElement(\"div\");\n  mainContent.classList.add(\"main-content\");\n  mainContent.append((0,_modules_dom__WEBPACK_IMPORTED_MODULE_0__.createForm)());\n  document.body.append(mainContent);\n  (0,_modules_dom__WEBPACK_IMPORTED_MODULE_0__.addFormListener)()\n})();\n\n\n//# sourceURL=webpack://odin-weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_domManipulation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/domManipulation */ \"./src/modules/domManipulation.js\");\n/* harmony import */ var _modules_cacheDom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/cacheDom */ \"./src/modules/cacheDom.js\");\n\n\n\n(() => {\n  const mainContent = document.createElement(\"div\");\n  mainContent.classList.add(\"main-content\");\n  mainContent.append((0,_modules_domManipulation__WEBPACK_IMPORTED_MODULE_0__.createForm)());\n  document.body.append(mainContent);\n  const dom = (0,_modules_cacheDom__WEBPACK_IMPORTED_MODULE_1__.cacheDom)();\n  (0,_modules_domManipulation__WEBPACK_IMPORTED_MODULE_0__.addFormListener)(dom);\n})();\n\n\n//# sourceURL=webpack://odin-weather-app/./src/index.js?");
 
 /***/ }),
 
-/***/ "./src/modules/dom.js":
-/*!****************************!*\
-  !*** ./src/modules/dom.js ***!
-  \****************************/
+/***/ "./src/modules/cacheDom.js":
+/*!*********************************!*\
+  !*** ./src/modules/cacheDom.js ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addFormListener: () => (/* binding */ addFormListener),\n/* harmony export */   createForm: () => (/* binding */ createForm)\n/* harmony export */ });\n/* harmony import */ var _weatherApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weatherApi */ \"./src/modules/weatherApi.js\");\n\n\nfunction createForm() {\n  const locationForm = document.createElement(\"form\");\n  locationForm.classList.add(\"location-form\");\n\n  const locationInput = document.createElement(\"input\");\n  locationInput.classList.add(\"location-input\");\n  locationInput.setAttribute(\"type\", \"text\");\n\n  const searchBtn = document.createElement(\"button\");\n  searchBtn.classList.add(\"search-btn\");\n  searchBtn.setAttribute(\"type\", \"submit\");\n  searchBtn.textContent = \"Search\";\n\n  locationForm.append(locationInput, searchBtn);\n  return locationForm;\n}\n\nfunction addFormListener() {\n  document\n    .querySelector(\".location-form\")\n    .addEventListener(\"submit\", async (e) => {\n      e.preventDefault();\n      const searchValue = document.querySelector(\".location-input\").value;\n      console.log(await (0,_weatherApi__WEBPACK_IMPORTED_MODULE_0__.getWeather)(searchValue));\n    });\n}\n\n\n//# sourceURL=webpack://odin-weather-app/./src/modules/dom.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   cacheDom: () => (/* binding */ cacheDom)\n/* harmony export */ });\nfunction cacheDom() {\n  const locationForm = document.querySelector(\".location-form\");\n  const locationInput = document.querySelector(\".location-input\");\n  return { locationForm, locationInput };\n}\n\n\n//# sourceURL=webpack://odin-weather-app/./src/modules/cacheDom.js?");
+
+/***/ }),
+
+/***/ "./src/modules/domManipulation.js":
+/*!****************************************!*\
+  !*** ./src/modules/domManipulation.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addFormListener: () => (/* binding */ addFormListener),\n/* harmony export */   createForm: () => (/* binding */ createForm)\n/* harmony export */ });\n/* harmony import */ var _weatherApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./weatherApi */ \"./src/modules/weatherApi.js\");\n\n\nfunction createForm() {\n  const locationForm = document.createElement(\"form\");\n  locationForm.classList.add(\"location-form\");\n\n  const locationInput = document.createElement(\"input\");\n  locationInput.classList.add(\"location-input\");\n  locationInput.setAttribute(\"type\", \"text\");\n\n  const searchBtn = document.createElement(\"button\");\n  searchBtn.classList.add(\"search-btn\");\n  searchBtn.setAttribute(\"type\", \"submit\");\n  searchBtn.textContent = \"Search\";\n\n  locationForm.append(locationInput, searchBtn);\n  return locationForm;\n}\n\nfunction addFormListener(dom) {\n  dom.locationForm.addEventListener(\"submit\", async (e) => {\n    e.preventDefault();\n    const searchValue = dom.locationInput.value;\n    console.log(await (0,_weatherApi__WEBPACK_IMPORTED_MODULE_0__.getWeather)(searchValue));\n  });\n}\n\n\n//# sourceURL=webpack://odin-weather-app/./src/modules/domManipulation.js?");
 
 /***/ }),
 
