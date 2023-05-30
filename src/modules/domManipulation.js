@@ -4,7 +4,7 @@ import { cacheDom } from "./cacheDom";
 export function loadContent() {
   const mainContent = document.createElement("div");
   mainContent.classList.add("main-content");
-  mainContent.append(createForm());
+  mainContent.append(createForm(), createWeatherCard());
   document.body.append(mainContent);
 }
 
@@ -28,6 +28,26 @@ function createForm() {
 
   locationForm.append(locationInput, searchBtn);
   return locationForm;
+}
+
+function createWeatherCard() {
+  const weatherCard = document.createElement("div");
+  weatherCard.classList.add("weather-card");
+
+  const location = document.createElement("h1");
+  location.classList.add("location");
+
+  const condition = document.createElement("h2");
+  condition.classList.add("condition");
+
+  const temperature = document.createElement("p");
+  temperature.classList.add("temperature");
+
+  const humidity = document.createElement("p");
+  humidity.classList.add("humidity");
+
+  weatherCard.append(location, condition, temperature, humidity);
+  return weatherCard;
 }
 
 function addFormListener(dom) {
