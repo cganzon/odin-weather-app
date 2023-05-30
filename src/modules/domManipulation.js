@@ -1,6 +1,6 @@
 import { getWeather } from "./weatherApi";
 
-export function createForm() {
+function createForm() {
   const locationForm = document.createElement("form");
   locationForm.classList.add("location-form");
 
@@ -15,6 +15,13 @@ export function createForm() {
 
   locationForm.append(locationInput, searchBtn);
   return locationForm;
+}
+
+export function loadContent() {
+  const mainContent = document.createElement("div");
+  mainContent.classList.add("main-content");
+  mainContent.append(createForm());
+  document.body.append(mainContent);
 }
 
 export function addFormListener(dom) {
