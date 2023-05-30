@@ -1,11 +1,9 @@
-import { getWeather } from "./modules/weatherApi";
-import { createForm } from "./modules/dom";
-
-console.log(await getWeather("San Diego"));
+import { createForm, addFormListener } from "./modules/dom";
 
 (() => {
   const mainContent = document.createElement("div");
   mainContent.classList.add("main-content");
   mainContent.append(createForm());
   document.body.append(mainContent);
+  addFormListener()
 })();

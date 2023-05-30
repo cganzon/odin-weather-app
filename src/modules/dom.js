@@ -9,8 +9,16 @@ export function createForm() {
   const searchBtn = document.createElement("button");
   searchBtn.classList.add("search-btn");
   searchBtn.setAttribute("type", "submit");
-  searchBtn.textContent = "Search"
+  searchBtn.textContent = "Search";
 
   locationForm.append(locationInput, searchBtn);
   return locationForm;
+}
+
+export function addFormListener() {
+  document.querySelector(".location-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const searchValue = document.querySelector(".location-input").value;
+    console.log(searchValue);
+  });
 }
