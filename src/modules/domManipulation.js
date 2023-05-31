@@ -1,5 +1,6 @@
 import { getWeather } from "./weatherApi";
 import { cacheDom } from "./cacheDom";
+import { FahrenheitToCelsius, celsiusToFahrenheit } from "./utils";
 
 export function loadContent() {
   const mainContent = document.createElement("div");
@@ -85,19 +86,19 @@ function addTempUnitsBtnListener(dom) {
     const currentTemperature = dom.temperature.textContent.slice(0, -1);
     changeTemperature(currentUnits, currentTemperature, dom);
   });
+}
 
-  function changeTemperature(units, temp, dom) {
-    if (units === "F") {
-      dom.tempUnitsBtn.textContent = "Celsius";
-      dom.tempUnitsBtn.setAttribute("data-units", "C");
-    } else {
-      dom.tempUnitsBtn.textContent = "Fahrenheit";
-      dom.tempUnitsBtn.setAttribute("data-units", "F");
-    }
-    if (temp && units === "F") {
-      dom.temperature.textContent = `${(((temp - 32) * 5) / 9).toFixed(1)}°`;
-    } else if (temp && units === "C") {
-      dom.temperature.textContent = `${((temp * 9) / 5 + 32).toFixed(1)}°`;
-    }
+function changeTemperature(units, temp, dom) {
+  if (units === "F") {
+    dom.tempUnitsBtn.textContent = "Celsius";
+    dom.tempUnitsBtn.setAttribute("data-units", "C");
+  } else {
+    dom.tempUnitsBtn.textContent = "Fahrenheit";
+    dom.tempUnitsBtn.setAttribute("data-units", "F");
+  }
+  if (temp && units === "F") {
+    dom.temperature.textContent = `${FahrenheitToCelsius(temp)}°`;
+  } else if (temp && units === "C") {
+    dom.temperature.textContent = `${celsiusToFahrenheit(temp)}°`;
   }
 }
