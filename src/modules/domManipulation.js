@@ -58,9 +58,14 @@ function createWeatherCard() {
 }
 
 function displayWeatherData(data, dom) {
+  const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
   dom.location.textContent = data.location.name;
   dom.condition.textContent = data.current.condition.text;
-  dom.temperature.textContent = `It is currently ${data.current.temp_f} °F`;
+  if (currentUnits === "F") {
+    dom.temperature.textContent = `${data.current.temp_f}°`;
+  } else {
+    dom.temperature.textContent = `${data.current.temp_c}°`;
+  }
   dom.humidity.textContent = `Humidity: ${data.current.humidity}%`;
 }
 
@@ -76,6 +81,23 @@ function addFormListener(dom) {
 
 function addTempUnitsBtnListener(dom) {
   dom.tempUnitsBtn.addEventListener("click", () => {
-    console.log(dom.tempUnitsBtn.getAttribute("data-units"));
+    const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
+    const currentTemperature = dom.temperature.textContent.slice(0, -1);
+    changeTemperature(currentUnits, currentTemperature, dom);
   });
+
+  function changeTemperature(units, temp, dom) {
+    if (units === "F") {
+      dom.tempUnitsBtn.textContent = "Celsius";
+      dom.tempUnitsBtn.setAttribute("data-units", "C");
+    } else {
+      dom.tempUnitsBtn.textContent = "Fahrenheit";
+      dom.tempUnitsBtn.setAttribute("data-units", "F");
+    }
+    if (temp && units === "F") {
+      dom.temperature.textContent = `${(((temp - 32) * 5) / 9).toFixed(1)}°`;
+    } else if (temp && units === "C") {
+      dom.temperature.textContent = `${((temp * 9) / 5 + 32).toFixed(1)}°`;
+    }
+  }
 }
