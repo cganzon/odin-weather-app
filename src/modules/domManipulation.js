@@ -50,10 +50,19 @@ function createWeatherCard() {
   return weatherCard;
 }
 
+function displayWeatherData(data, dom) {
+  dom.location.textContent = data.location.name;
+  dom.condition.textContent = data.current.condition.text;
+  dom.temperature.textContent = `It is currently ${data.current.temp_f} °F`;
+  dom.humidity.textContent = `Humidity: ${data.current.humidity}%`;
+}
+
 function addFormListener(dom) {
   dom.locationForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const searchValue = dom.locationInput.value;
-    console.log(await getWeather(searchValue));
+    const location = dom.locationInput.value;
+    const weatherData = await getWeather(location);
+    console.log(weatherData);
+    displayWeatherData(weatherData, dom);
   });
 }
