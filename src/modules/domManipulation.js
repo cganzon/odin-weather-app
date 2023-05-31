@@ -4,13 +4,20 @@ import { cacheDom } from "./cacheDom";
 export function loadContent() {
   const mainContent = document.createElement("div");
   mainContent.classList.add("main-content");
-  mainContent.append(createForm(), createWeatherCard());
+
+  const tempUnitsBtn = document.createElement("button");
+  tempUnitsBtn.classList.add("temp-units-btn");
+  tempUnitsBtn.setAttribute("data-units", "F");
+  tempUnitsBtn.textContent = "Fahrenheit";
+
+  mainContent.append(createForm(), tempUnitsBtn, createWeatherCard());
   document.body.append(mainContent);
 }
 
 export function addListeners() {
   const dom = cacheDom();
   addFormListener(dom);
+  addTempUnitsBtnListener(dom);
 }
 
 function createForm() {
@@ -64,5 +71,11 @@ function addFormListener(dom) {
     const weatherData = await getWeather(location);
     console.log(weatherData);
     displayWeatherData(weatherData, dom);
+  });
+}
+
+function addTempUnitsBtnListener(dom) {
+  dom.tempUnitsBtn.addEventListener("click", () => {
+    console.log(dom.tempUnitsBtn.getAttribute("data-units"));
   });
 }
