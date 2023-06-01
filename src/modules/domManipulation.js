@@ -75,8 +75,13 @@ function addFormListener(dom) {
     e.preventDefault();
     const location = dom.locationInput.value;
     const weatherData = await getWeather(location);
-    console.log(weatherData);
-    displayWeatherData(weatherData, dom);
+    if (weatherData.error && weatherData.error.code === 1003) {
+      console.log("Please provide a location");
+    } else if (weatherData.error && weatherData.error.code === 1006) {
+      console.log("No location found");
+    } else {
+      displayWeatherData(weatherData, dom);
+    }
   });
 }
 
