@@ -13,4 +13,12 @@ module.exports = {
       title: "Odin Weather App",
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
 };
