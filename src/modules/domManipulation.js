@@ -34,7 +34,10 @@ function createForm() {
   searchBtn.setAttribute("type", "submit");
   searchBtn.textContent = "Search";
 
-  locationForm.append(locationInput, searchBtn);
+  const locationError = document.createElement("span");
+  locationError.classList.add("error");
+
+  locationForm.append(locationInput, searchBtn, locationError);
   return locationForm;
 }
 
@@ -77,9 +80,12 @@ function addFormListener(dom) {
     const weatherData = await getWeather(location);
     if (weatherData.error && weatherData.error.code === 1003) {
       console.log("Please provide a location");
+      dom.locationError.textContent = "Please provide a location";
     } else if (weatherData.error && weatherData.error.code === 1006) {
+      dom.locationError.textContent = "No location found";
       console.log("No location found");
     } else {
+      dom.locationError.textContent = "";
       displayWeatherData(weatherData, dom);
     }
   });

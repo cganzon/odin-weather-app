@@ -1,6 +1,7 @@
 export function cacheDom() {
   const locationForm = document.querySelector(".location-form");
   const locationInput = document.querySelector(".location-input");
+  const locationError = document.querySelector(".error");
   const tempUnitsBtn = document.querySelector(".temp-units-btn");
   const location = document.querySelector(".location");
   const condition = document.querySelector(".condition");
@@ -9,6 +10,7 @@ export function cacheDom() {
   return {
     locationForm,
     locationInput,
+    locationError,
     tempUnitsBtn,
     location,
     condition,
