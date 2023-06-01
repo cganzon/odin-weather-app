@@ -61,6 +61,34 @@ function createWeatherCard() {
   return weatherCard;
 }
 
+function addFormListener(dom) {
+  dom.locationForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const location = dom.locationInput.value;
+    const weatherData = await getWeather(location);
+    checkWeatherData(weatherData, dom);
+  });
+}
+
+function addTempUnitsBtnListener(dom) {
+  dom.tempUnitsBtn.addEventListener("click", () => {
+    const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
+    const currentTemperature = dom.temperature.textContent.slice(0, -1);
+    changeTemperature(currentUnits, currentTemperature, dom);
+  });
+}
+
+function checkWeatherData(data, dom) {
+  if (data.error && data.error.code === 1003) {
+    dom.locationError.textContent = "Please provide a location";
+  } else if (data.error && data.error.code === 1006) {
+    dom.locationError.textContent = "No location found";
+  } else {
+    dom.locationError.textContent = "";
+    displayWeatherData(data, dom);
+  }
+}
+
 function displayWeatherData(data, dom) {
   const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
   dom.location.textContent = data.location.name;
@@ -71,32 +99,6 @@ function displayWeatherData(data, dom) {
     dom.temperature.textContent = `${data.current.temp_c}°`;
   }
   dom.humidity.textContent = `Humidity: ${data.current.humidity}%`;
-}
-
-function addFormListener(dom) {
-  dom.locationForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const location = dom.locationInput.value;
-    const weatherData = await getWeather(location);
-    if (weatherData.error && weatherData.error.code === 1003) {
-      console.log("Please provide a location");
-      dom.locationError.textContent = "Please provide a location";
-    } else if (weatherData.error && weatherData.error.code === 1006) {
-      dom.locationError.textContent = "No location found";
-      console.log("No location found");
-    } else {
-      dom.locationError.textContent = "";
-      displayWeatherData(weatherData, dom);
-    }
-  });
-}
-
-function addTempUnitsBtnListener(dom) {
-  dom.tempUnitsBtn.addEventListener("click", () => {
-    const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
-    const currentTemperature = dom.temperature.textContent.slice(0, -1);
-    changeTemperature(currentUnits, currentTemperature, dom);
-  });
 }
 
 function changeTemperature(units, temp, dom) {
