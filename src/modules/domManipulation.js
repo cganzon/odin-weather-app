@@ -73,7 +73,7 @@ function addFormListener(dom) {
 function addTempUnitsBtnListener(dom) {
   dom.tempUnitsBtn.addEventListener("click", () => {
     const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
-    const currentTemperature = dom.temperature.textContent.slice(0, -1);
+    const currentTemperature = dom.temperature.textContent.slice(0, -2);
     changeTemperature(currentUnits, currentTemperature, dom);
   });
 }
@@ -85,6 +85,7 @@ function checkWeatherData(data, dom) {
     dom.locationError.textContent = "No location found";
   } else {
     dom.locationError.textContent = "";
+    console.log(data);
     displayWeatherData(data, dom);
   }
 }
@@ -94,9 +95,9 @@ function displayWeatherData(data, dom) {
   dom.location.textContent = data.location.name;
   dom.condition.textContent = data.current.condition.text;
   if (currentUnits === "F") {
-    dom.temperature.textContent = `${data.current.temp_f}°`;
+    dom.temperature.textContent = `${data.current.temp_f}°F`;
   } else {
-    dom.temperature.textContent = `${data.current.temp_c}°`;
+    dom.temperature.textContent = `${data.current.temp_c}°C`;
   }
   dom.humidity.textContent = `Humidity: ${data.current.humidity}%`;
 }
@@ -110,8 +111,8 @@ function changeTemperature(units, temp, dom) {
     dom.tempUnitsBtn.setAttribute("data-units", "F");
   }
   if (temp && units === "F") {
-    dom.temperature.textContent = `${FahrenheitToCelsius(temp)}°`;
+    dom.temperature.textContent = `${FahrenheitToCelsius(temp)}°C`;
   } else if (temp && units === "C") {
-    dom.temperature.textContent = `${celsiusToFahrenheit(temp)}°`;
+    dom.temperature.textContent = `${celsiusToFahrenheit(temp)}°F`;
   }
 }
