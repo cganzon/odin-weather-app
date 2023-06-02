@@ -58,7 +58,17 @@ function createForm() {
   const locationError = document.createElement("span");
   locationError.classList.add("error");
 
-  locationForm.append(locationLabel, locationInput, searchBtn, locationError);
+  const loading = document.createElement("p");
+  loading.classList.add("loading", "hide");
+  loading.textContent = "Loading...";
+
+  locationForm.append(
+    locationLabel,
+    locationInput,
+    searchBtn,
+    locationError,
+    loading
+  );
   return locationForm;
 }
 
@@ -88,9 +98,11 @@ function createWeatherCard() {
 
 function addFormListener(dom) {
   dom.locationForm.addEventListener("submit", async (e) => {
+    dom.loading.classList.remove("hide");
     e.preventDefault();
     const location = dom.locationInput.value;
     const weatherData = await getWeather(location);
+    dom.loading.classList.add("hide");
     checkWeatherData(weatherData, dom);
   });
 }
