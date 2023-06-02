@@ -11,7 +11,7 @@ export function loadContent() {
   tempUnitsBtn.setAttribute("data-units", "F");
   tempUnitsBtn.textContent = "Fahrenheit";
 
-  mainContent.append(createForm(), tempUnitsBtn, createWeatherCard());
+  mainContent.append(tempUnitsBtn, createForm(), createWeatherCard());
   document.body.append(mainContent);
 }
 
@@ -25,9 +25,16 @@ function createForm() {
   const locationForm = document.createElement("form");
   locationForm.classList.add("location-form");
 
+  const locationLabel = document.createElement("label");
+  locationLabel.classList.add("location-label");
+  locationLabel.setAttribute("for", "location");
+  locationLabel.textContent = "Location";
+
   const locationInput = document.createElement("input");
   locationInput.classList.add("location-input");
-  locationInput.setAttribute("type", "text");
+  locationInput.id = "location";
+  locationInput.setAttribute("type", "search");
+  locationInput.setAttribute("autocomplete", "off");
 
   const searchBtn = document.createElement("button");
   searchBtn.classList.add("search-btn");
@@ -37,13 +44,16 @@ function createForm() {
   const locationError = document.createElement("span");
   locationError.classList.add("error");
 
-  locationForm.append(locationInput, searchBtn, locationError);
+  locationForm.append(locationLabel, locationInput, searchBtn, locationError);
   return locationForm;
 }
 
 function createWeatherCard() {
   const weatherCard = document.createElement("div");
   weatherCard.classList.add("weather-card");
+
+  const weatherWrapper = document.createElement("div")
+  weatherWrapper.classList.add("weather")
 
   const location = document.createElement("h1");
   location.classList.add("location");
@@ -57,7 +67,8 @@ function createWeatherCard() {
   const humidity = document.createElement("p");
   humidity.classList.add("humidity");
 
-  weatherCard.append(location, condition, temperature, humidity);
+  weatherWrapper.append(condition, temperature, humidity)
+  weatherCard.append(location, weatherWrapper);
   return weatherCard;
 }
 
