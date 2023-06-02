@@ -103,18 +103,19 @@ function checkWeatherData(data, dom) {
 
 function displayWeatherData(data, dom) {
   const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
+  dom.condition.textContent = data.current.condition.text;
+  dom.humidity.textContent = `Humidity: ${data.current.humidity}%`;
+
   dom.location.textContent = `${data.location.name}, ${
     data.location.country === "United States of America"
       ? data.location.region
       : data.location.country
   }`;
-  dom.condition.textContent = data.current.condition.text;
-  if (currentUnits === "F") {
-    dom.temperature.textContent = `${data.current.temp_f}°F`;
-  } else {
-    dom.temperature.textContent = `${data.current.temp_c}°C`;
-  }
-  dom.humidity.textContent = `Humidity: ${data.current.humidity}%`;
+
+  dom.temperature.textContent =
+    currentUnits === "F"
+      ? `${data.current.temp_f}°F`
+      : `${data.current.temp_c}°C`;
 }
 
 function changeTemperature(units, temp, dom) {
