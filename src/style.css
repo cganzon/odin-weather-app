@@ -9,7 +9,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  /* Background image provided by https://unsplash.com/@noaa */
   background: url("./images/background.avif") no-repeat center;
   background-size: cover;
   color: #fff;

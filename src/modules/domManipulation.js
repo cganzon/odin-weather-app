@@ -96,7 +96,6 @@ function checkWeatherData(data, dom) {
     dom.locationError.textContent = "No location found";
   } else {
     dom.locationError.textContent = "";
-    console.log(data);
     displayWeatherData(data, dom);
   }
 }
