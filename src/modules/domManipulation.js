@@ -11,8 +11,22 @@ export function loadContent() {
   tempUnitsBtn.setAttribute("data-units", "F");
   tempUnitsBtn.textContent = "Fahrenheit";
 
+  const credit = document.createElement("div");
+  credit.classList.add("credit");
+
+  const creditText = document.createElement("p");
+  credit.classList.add("credit");
+  credit.textContent = `Image provided by`;
+
+  const creditLink = document.createElement("a");
+  creditLink.classList.add("credit-link");
+  creditLink.href = "https://unsplash.com/@noaa";
+  creditLink.setAttribute("target", "_blank");
+  creditLink.textContent = "NOAA";
+
   mainContent.append(tempUnitsBtn, createForm(), createWeatherCard());
-  document.body.append(mainContent);
+  credit.append(creditText, creditLink);
+  document.body.append(mainContent, credit);
 }
 
 export function addListeners() {
