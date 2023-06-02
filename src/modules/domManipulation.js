@@ -52,8 +52,8 @@ function createWeatherCard() {
   const weatherCard = document.createElement("div");
   weatherCard.classList.add("weather-card");
 
-  const weatherWrapper = document.createElement("div")
-  weatherWrapper.classList.add("weather")
+  const weatherWrapper = document.createElement("div");
+  weatherWrapper.classList.add("weather");
 
   const location = document.createElement("h1");
   location.classList.add("location");
@@ -67,7 +67,7 @@ function createWeatherCard() {
   const humidity = document.createElement("p");
   humidity.classList.add("humidity");
 
-  weatherWrapper.append(condition, temperature, humidity)
+  weatherWrapper.append(condition, temperature, humidity);
   weatherCard.append(location, weatherWrapper);
   return weatherCard;
 }
@@ -103,7 +103,11 @@ function checkWeatherData(data, dom) {
 
 function displayWeatherData(data, dom) {
   const currentUnits = dom.tempUnitsBtn.getAttribute("data-units");
-  dom.location.textContent = data.location.name;
+  dom.location.textContent = `${data.location.name}, ${
+    data.location.country === "United States of America"
+      ? data.location.region
+      : data.location.country
+  }`;
   dom.condition.textContent = data.current.condition.text;
   if (currentUnits === "F") {
     dom.temperature.textContent = `${data.current.temp_f}°F`;
