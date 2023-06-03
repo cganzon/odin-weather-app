@@ -1,4 +1,4 @@
-# Odn Weather App
+# Odin Weather App
 
 This is the seventh project from the Full Stack Javascript path of The Odin Project. The application uses [Weather API](https://www.weatherapi.com/) to display simple weather data for a given location.
 
