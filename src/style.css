@@ -22,16 +22,30 @@ label {
   display: block;
 }
 
-input {
-  padding: 0.2rem 0.5rem;
+input,
+button {
+  border: none;
+  padding: 0.3rem 0.5rem;
   font-size: inherit;
+  font-family: inherit;
 }
 
 button {
   cursor: pointer;
-  font-family: inherit;
-  padding: 0.2rem 0.5rem;
-  font-size: inherit;
+  background-color: #3080b5;
+  color: #fff;
+}
+
+input {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+button:hover {
+  background-color: #25648d;
+}
+
+button:active {
+  background-color: #1b4765;
 }
 
 .hide {
@@ -60,6 +74,11 @@ button {
 .temp-units-btn {
   margin-bottom: 1rem;
   align-self: end;
+  border-radius: 0.5rem;
+}
+
+.search-btn {
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .weather-card {
